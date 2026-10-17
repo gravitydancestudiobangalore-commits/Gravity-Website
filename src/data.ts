@@ -91,6 +91,12 @@ export const BATCHES: Record<BranchId, Batch[]> = {
 };
 
 // Western dance monthly fee by classes per week (owner's pricing). Other classes use their own batch fee. Admission is extra, one-time.
+// Packages (owner's latest pricing). was = old price shown struck through.
+export const PACKAGES = [
+  { name: '6-month package', price: 10000, was: 12000, duration: '6 months', note: 'Discount on the standard monthly fees', admission: true },
+  { name: '1-year package', price: 20000, was: 24000, duration: '12 months', note: 'Best value. No admission fee (saves ₹1,500)', admission: false },
+];
+
 export const PLANS = [
   { perWeek: 2, fee: 1500 },
   { perWeek: 3, fee: 2000 },

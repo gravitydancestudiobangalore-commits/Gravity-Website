@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { ADMISSION_FEE, BATCHES, BRANCHES, EXTRAS, HOURS, PERKS, PLANS, SHOW_FEES, waLink, type BranchId } from '../data';
+import { ADMISSION_FEE, BATCHES, BRANCHES, EXTRAS, HOURS, PACKAGES, PERKS, PLANS, SHOW_FEES, waLink, type BranchId } from '../data';
 import { Button, Icon, PageHeader, Picture, Reveal, SectionTitle, WaIcon } from '../ui';
 
 const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`;
@@ -94,6 +94,30 @@ export default function Classes() {
           </div>
         ))}
 
+      </section>
+
+      {/* Packages */}
+      <section className="mx-auto max-w-6xl px-4 pb-16 md:px-8 md:pb-20">
+        <h2 className="text-[1.75rem] md:text-3xl">Packages</h2>
+        <p className="mt-2 text-mute">Save more when you commit for longer.</p>
+        <ul className="mt-6 grid gap-4 md:grid-cols-2">
+          {PACKAGES.map((p) => (
+            <li key={p.name} className="rounded-3xl border-2 border-gold/50 bg-paper p-6">
+              <p className="text-[15px] font-semibold text-gold-ink">{p.duration}</p>
+              <h3 className="mt-1 text-2xl">{p.name}</h3>
+              <p className="mt-4 flex flex-wrap items-baseline gap-3">
+                <span className="font-display text-4xl font-bold text-royal">{rs(p.price)}</span>
+                <span className="text-lg text-mute line-through">{rs(p.was)}</span>
+              </p>
+              <p className="mt-3 text-[15px] text-mute">{p.note}</p>
+              <div className="mt-5">
+                <a href={waLink(`Hi! I'd like the ${p.name} (${rs(p.price)}) at ${name}.`)} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-royal px-6 py-3 font-semibold text-stage">
+                  <WaIcon className="size-5" /> Ask about this package
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* More than dance */}

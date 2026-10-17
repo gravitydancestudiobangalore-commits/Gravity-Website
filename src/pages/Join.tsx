@@ -117,6 +117,17 @@ export default function Join() {
           </div>
         </aside>
       </section>
+      {/* Reviews from demo attendees: invite real feedback, no invented quotes */}
+      <section className="mx-auto max-w-6xl px-4 pb-20 md:px-8">
+        <div className="rounded-3xl bg-royal p-7 text-stage md:p-10">
+          <h2 className="text-[1.75rem] text-stage md:text-3xl">Came for a free demo?</h2>
+          <p className="mt-2 max-w-2xl text-stage/85">Tell other parents how it went. Your review helps families choose with confidence.</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="https://www.google.com/search?q=Gravity+Dance+Academy+Rajajinagar#lrd=reviews" target="_blank" rel="noopener" className="inline-flex min-h-12 items-center rounded-full bg-gold px-6 py-3 font-semibold text-royal">Leave a Google review</a>
+            <a href={waLink('Hi! I attended a free demo class and would like to share my feedback.')} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-gold/60 px-6 py-3 font-semibold text-stage"><WaIcon className="size-5" /> Share feedback on WhatsApp</a>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
