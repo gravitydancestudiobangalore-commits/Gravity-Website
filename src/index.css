@@ -1,54 +1,100 @@
 @import "tailwindcss";
 
-/* Design plan — taken from the Gravity logo: black stage, foil gold, signboard red as a rare accent.
-   stage #0A0907 · raised #16130E · gold #E3B04B · gold-hi #F7D98B · gold-lo #9C7424 · chalk #F4F1EA · signal red #E0313A
-   Type: Bricolage Grotesque (display + body), Great Vibes (logo-style script accents only). */
+/* Design: light & royal — an ivory palace invitation, not a nightclub.
+   paper  #FBF8F3 ivory background   soft #F4EDE2 warm panel      line #E6DBCB hairlines
+   ink    #1C2333 main text           mute #4A5266 secondary text
+   royal  #1B2A4A royal navy (headings, buttons, rich bands)   royal-2 #263B66 hover
+   gold   #C99A3D antique gold — thin lines, icons, stars only        gold-ink #8A5C12 gold text on ivory (AA)
+   stage  #FBF8F3 text on royal
+   Type: Playfair Display (headings, royal but clear) + Poppins (everything else). */
 @theme {
-  --color-stage: #0a0907;
-  --color-raised: #16130e;
-  --color-line: #2a241a;
-  --color-gold: #e3b04b;
-  --color-gold-hi: #f7d98b;
-  --color-gold-lo: #9c7424;
-  --color-chalk: #f4f1ea;
-  --color-mute: #b4ab9a;
-  --color-signal: #e0313a;
-  --font-sans: "Bricolage Grotesque", system-ui, sans-serif;
-  --font-script: "Great Vibes", cursive;
+  --color-paper: #fbf8f3;
+  --color-soft: #f4ede2;
+  --color-line: #e6dbcb;
+  --color-ink: #1c2333;
+  --color-mute: #4a5266;
+  --color-royal: #1b2a4a;
+  --color-royal-2: #263b66;
+  --color-gold: #c99a3d;
+  --color-gold-ink: #8a5c12;
+  --color-stage: #fbf8f3;
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
 }
 
-html { scroll-behavior: smooth; background: var(--color-stage); }
-body { background: var(--color-stage); color: var(--color-chalk); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-::selection { background: var(--color-gold); color: var(--color-stage); }
-:focus-visible { outline: 2px solid var(--color-gold-hi); outline-offset: 3px; border-radius: 6px; }
+html { scroll-behavior: smooth; background: var(--color-paper); }
+/* Phone-first readability: 17px body, relaxed lines, bold serif headings (thin serifs vanish on small screens). */
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.005em; line-height: 1.15; color: var(--color-royal); }
+::selection { background: var(--color-royal); color: var(--color-stage); }
+:focus-visible { outline: 2px solid var(--color-royal); outline-offset: 3px; border-radius: 10px; }
 
-/* Foil gold text, like the logo */
+/* Navy-to-gold shimmer for one or two highlighted words */
 .foil {
-  background: linear-gradient(100deg, #9c7424 0%, #f7d98b 22%, #e3b04b 40%, #fff3c4 50%, #c8902e 62%, #f7d98b 80%, #9c7424 100%);
+  background: linear-gradient(100deg, #1b2a4a 0%, #35548c 25%, #b8862b 45%, #d9b25c 52%, #35548c 72%, #1b2a4a 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: foil 7s linear infinite;
+}
+@keyframes foil { to { background-position: -250% 0; } }
+
+/* Gold version, used only on royal (dark) bands */
+.foil-gold {
+  background: linear-gradient(100deg, #b8862b 0%, #f2d48a 30%, #fff3cf 50%, #d9a842 70%, #b8862b 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: foil 6s linear infinite;
 }
-@keyframes foil { to { background-position: -250% 0; } }
 
-.outline-text { color: transparent; -webkit-text-stroke: 1px rgb(227 176 75 / 0.35); }
+.outline-text { color: transparent; -webkit-text-stroke: 1px rgb(27 42 74 / 0.10); }
 
-.grain::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+/* Soft royal glow behind headers */
+.glow { background:
+  radial-gradient(55% 80% at 15% 0%, rgb(201 154 61 / .14), transparent 70%),
+  radial-gradient(45% 70% at 95% 15%, rgb(38 59 102 / .10), transparent 70%); }
 
-.marquee { animation: marquee 28s linear infinite; }
-.marquee-rev { animation: marquee 34s linear infinite reverse; }
+/* Thin ornamental divider ── ✦ ── */
+.ornament { display: flex; align-items: center; gap: .75rem; color: var(--color-gold); }
+.ornament::before, .ornament::after { content: ""; height: 1px; width: 2.5rem; background: currentColor; opacity: .7; flex-shrink: 0; }
+.ornament.left::after { display: none; }
+.ornament.left::before { width: 1.75rem; }
+
+.marquee { animation: marquee 32s linear infinite; }
 @keyframes marquee { to { transform: translateX(-50%); } }
+
+.shine { position: relative; overflow: hidden; isolation: isolate; }
+.shine::after { content: ""; position: absolute; inset: 0; z-index: -1; transform: translateX(-120%) skewX(-20deg); background: linear-gradient(90deg, transparent, rgb(242 212 138 / .45), transparent); transition: transform .8s ease; }
+.shine:hover::after { transform: translateX(120%) skewX(-20deg); }
 
 .pulse-dot { animation: pulse 1.6s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .35; transform: scale(.8); } }
 
-.placeholder-tag {
-  display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .01em;
-  color: #f7d98b; background: rgb(227 176 75 / .1); border: 1px dashed rgb(227 176 75 / .5);
-  padding: .15rem .5rem; border-radius: 999px;
+/* ---- Entrance animations: pure CSS so content is ALWAYS visible at the end, even if JS is slow/paused ---- */
+:root { --ease-out: cubic-bezier(.16, 1, .3, 1); }
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.94) rotate(1.5deg); } to { opacity: 1; transform: none; } }
+@keyframes word-up { from { transform: translateY(110%) rotate(5deg); } to { transform: none; } }
+@keyframes bar-up { from { transform: translateY(140%); } to { transform: none; } }
+.enter { animation: rise .8s var(--ease-out) both; }
+.enter-pop { animation: pop 1.1s var(--ease-out) both; }
+.page-in { animation: rise .45s ease-out both; }
+.bar-in { animation: bar-up .6s var(--ease-out) .8s both; }
+
+/* Scroll reveal: hidden only after JS marks the page ready (.js), shown when .in is added */
+.js .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.js .rv.in { opacity: 1; transform: none; }
+
+/* Masked word-by-word headings */
+.word { display: inline-block; overflow: hidden; padding-bottom: .12em; vertical-align: bottom; }
+.word > span { display: inline-block; }
+.js .words:not(.in):not(.now) .word > span { transform: translateY(110%) rotate(5deg); }
+.words.in .word > span { transition: transform .9s var(--ease-out); }
+.words.now .word > span { animation: word-up .9s var(--ease-out) both; }
+
+/* Safety net: ~2.5s after a page opens, force every load animation to its final state
+   (covers browsers that pause animations, e.g. background tabs or battery saver). */
+.settled .enter, .settled .enter-pop, .settled .page-in, .settled .bar-in, .settled .words.now .word > span {
+  animation: none !important; opacity: 1 !important; transform: none !important;
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -56,5 +102,6 @@ body { background: var(--color-stage); color: var(--color-chalk); font-family: v
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .foil, .marquee, .marquee-rev, .pulse-dot { animation: none; }
+  .foil, .foil-gold, .marquee, .pulse-dot, .enter, .enter-pop, .page-in, .bar-in, .words.now .word > span { animation: none; }
+  .js .rv, .js .words:not(.in):not(.now) .word > span { opacity: 1; transform: none; transition: none; }
 }
