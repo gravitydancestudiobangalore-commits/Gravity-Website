@@ -12,7 +12,7 @@ const TASKS = [
   { label: 'Timings & fees', hint: 'From ₹1,500 / month', to: '/classes', icon: 'clock' },
   { label: 'Book a free demo', hint: 'First class free', to: '/join', icon: 'spark' },
   { label: 'Find a branch', hint: 'Maps & directions', to: '/branches', icon: 'pin' },
-  { label: 'Call us', hint: '+91 88677 64826', href: TEL, icon: 'phone' },
+  { label: 'Call us', hint: '+91 78925 87219', href: TEL, icon: 'phone' },
   { label: 'Watch performances', hint: 'Videos & photos', to: '/gallery', icon: 'play' },
   { label: 'Our achievements', hint: 'Awards & TV shows', to: '/achievements', icon: 'trophy' },
 ] as const;

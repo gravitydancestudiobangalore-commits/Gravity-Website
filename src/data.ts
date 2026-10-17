@@ -1,10 +1,10 @@
 // All site content lives here. Edit this file to change text, timings, fees or photos.
 
-export const PHONE_DISPLAY = '+91 88677 64826';
-export const PHONES = ['88677 64826', '63635 37624', '78925 87219'];
-export const TEL = 'tel:+918867764826';
+export const PHONE_DISPLAY = '+91 78925 87219';
+export const PHONES = ['78925 87219', '88677 64826', '63635 37624'];
+export const TEL = 'tel:+917892587219';
 export const EMAIL = 'gravitydancestudiobangalore@gmail.com';
-export const waLink = (text: string) => `https://wa.me/918867764826?text=${encodeURIComponent(text)}`;
+export const waLink = (text: string) => `https://wa.me/917892587219?text=${encodeURIComponent(text)}`;
 export const TRIAL_MSG = 'Hello Gravity Dance Academy! I would like to book a free demo class.';
 
 export const RATING = 4.9;
